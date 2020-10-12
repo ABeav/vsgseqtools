@@ -22,7 +22,7 @@ vsg_read <- function(filename, samplename = TRUE) {
     dplyr::filter( file != "file") %>%
     dplyr::mutate( Percent = readr::parse_number(Percent),
             RPKM = readr::parse_number(RPKM),
-            dplyr::across(pct_id_vs_query:assembled_VSG_length, parse_number)) # TODO: I can do this stuff in the read in step
+            dplyr::across(pct_id_vs_query:assembled_VSG_length, readr::parse_number)) # TODO: I can do this stuff in the read in step
   if ( samplename == TRUE ) {
     tidyr::separate(filename, file, "samplename", sep = ".fq", convert = TRUE) # TODO: figure out how to make this also separate based on ".fastq".
   } else {
