@@ -1,16 +1,24 @@
-Package: vsgr
-Title: What the Package Does (One Line, Title Case)
+Package: vsgseqtools
+Title: Helpful Functions for VSG Sequencing Analysis
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Alexander",
+           family = "Beaver",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to
-    pick a license
+           email = "abeaver3@jhmi.edu")
+Description: A collection of functions that helps analyze and tidy up the output from VSG sequencing.
+URL: https://github.com/mugnierlab/VSGSeqPipeline
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
+Suggests: 
+    testthat
+Imports: 
+    dplyr (>= 1.0.0),
+    magrittr,
+    tibble,
+    stringr,
+    readr,
+    tidyr

@@ -1,0 +1,84 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# vsgseqtools
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+A collection of functions that helps analyze and tidy up the output from VSG sequencing. The purpose of this package is to be used specifically for analyzing data produced from the [VSGSeqPipeline](https://github.com/mugnierlab/VSGSeqPipeline). 
+
+## Installation
+
+``` r
+library(devtools)
+devtools::install_github("ABeav/vsgseqtools")
+```
+
+## Examples
+
+There are several helpful tools in this package. Below is an example of a few tools that help read in and analyze VSGSeqPipeline results. 
+
+```{r read, warning=FALSE, message=FALSE}
+library(tidyverse) # The tidyverse is required
+library(vsgseqtools)
+
+## This function accurately reads in the results from the raw VSGSeqPipeline output
+results <- vsg_read("mock_data/mock_RESULTS.txt")
+head(results)
+```
+
+The `vsg_rename()` function allows you to add a column for the clusters produced by cd-hit in the VSGSeqpipeline. However, you do need to provide a reference that has each VSG name and its associated cluster name (I do this using this script [MatchVSGs.py](additional_resources/)).
+
+```{r rename, warning=FALSE, message=FALSE}
+vsg_rename(results, "mock_data/cluster_reference_table.txt") %>%
+  select(mouse, day, tissue, Percent, cluster, VSG)
+```
+
+Often when analyzing VSG expression, we count the total number of VSGs in a sample. The `vsg_count` function helps streamline this with one line of code. 
+
+```{r count, warning=FALSE, message=FALSE}
+results %>%
+  vsg_count(mouse, day, tissue) 
+
+# This can also be plotted directly after
+
+results %>%
+  vsg_count(mouse, day, tissue) %>%
+  ggplot(aes(x = tissue, y = vsg_count)) + 
+  facet_wrap("day") +
+  geom_boxplot() +
+  geom_dotplot(binaxis='y', stackdir= "center" , dotsize=.6, position=position_dodge(.75)) +
+  xlab("") +
+  ylab("Number of VSGs") +
+  theme(axis.text = element_text(angle = 30,hjust = 1, size = 16, color = 'black'))
+```
+
+It can be helpful to look at the most highly expressed VSG in each sample as well. I created a function, `vsg_max`, to help pull the maximum expressed VSG out easily. This is particularly useful to find the starting VSG expressed in an infection on day 6. 
+
+```{r}
+results %>%
+  filter(day == "D6", tissue == "blood") %>%
+  vsg_max(mouse) %>% 
+  select(mouse, day, tissue, Percent, VSG)
+```
+
+The last function I wanted to highlight is little more niche. This function is helpful if you want to create a data frame that has includes all VSGs found and represents them in each sample. VSGs that were not found in a sample are represented by having a Percent of 0, meaning 0% of parasites expressed that VSG. 
+
+```{r}
+ vsg_expand(results, "samplename", "VSG") %>%
+  select(samplename, Percent, VSG)
+```
+
