@@ -75,7 +75,7 @@ results %>%
   select(mouse, day, tissue, Percent, VSG)
 ```
 
-The last function I wanted to highlight is little more niche. This function is helpful if you want to create a data frame that has includes all VSGs found and represents them in each sample. VSGs that were not found in a sample are represented by having a Percent of 0, meaning 0% of parasites expressed that VSG. 
+The last function I wanted to highlight is little more niche. `vsg_expand` is helpful if you want to create a data frame that has includes all VSGs found and represents them in each sample. VSGs that were not found in a sample are represented by having a Percent of 0, meaning 0% of parasites expressed that VSG. 
 
 ```{r}
  vsg_expand(results, "samplename", "VSG") %>%

@@ -129,11 +129,11 @@ results %>%
 #> 8 M45   D6    blood     96.0 TRINITY_DN0_c0_g1_i1_1_72_1464_RC_M45_D6_blood
 ```
 
-The last function I wanted to highlight is little more niche. This
-function is helpful if you want to create a data frame that has includes
-all VSGs found and represents them in each sample. VSGs that were not
-found in a sample are represented by having a Percent of 0, meaning 0%
-of parasites expressed that VSG.
+The last function I wanted to highlight is little more niche.
+`vsg_expand` is helpful if you want to create a data frame that has
+includes all VSGs found and represents them in each sample. VSGs that
+were not found in a sample are represented by having a Percent of 0,
+meaning 0% of parasites expressed that VSG.
 
 ``` r
  vsg_expand(results, "samplename", "VSG") %>%
