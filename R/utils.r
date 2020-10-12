@@ -1,5 +1,3 @@
-
 #' @importFrom magrittr %>%
 #' @export
 magrittr::`%>%`
-
