@@ -14,7 +14,7 @@
 #' vsg_max(results_df, mouse, tissue, day)
 vsg_max <- function(df,...) {
   df %>%
-    group_by(...) %>%
-    filter(Percent == max(Percent)) %>%
-    ungroup()
+    dplyr::group_by(...) %>%
+    dplyr::filter(Percent == max(Percent)) %>%
+    dplyr::ungroup()
 }
