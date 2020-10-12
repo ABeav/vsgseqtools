@@ -10,6 +10,8 @@
 #'
 #' @return Returns a tibble of the input VSG Seq results file with correctly
 #'   identified column types.
+#'
+#' @importFrom readr parse_number
 #' @export
 #'
 #' @examples
