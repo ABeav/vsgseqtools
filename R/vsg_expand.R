@@ -21,9 +21,9 @@ vsg_expand <- function(df, col1, col2, merge = TRUE) {
   col2 <- as.name(col2)
 
   samples <- df %>%
-    dplyr::distinct(col1)
+    dplyr::distinct(df[col1])
   clusters <- df %>%
-    dplyr::distinct(col2)
+    dplyr::distinct(df[col2])
 
   expanded <- tidyr::expand_grid(samples, clusters)
 
