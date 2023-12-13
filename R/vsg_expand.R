@@ -21,9 +21,9 @@ vsg_expand <- function(df, col1, col2, merge = TRUE) {
   col2 <- as.name(col2)
 
   samples <- df %>%
-    vsgseqtools::vsg_distinct_vectorize(df[col1])
+    dplyr::distinct(col1)
   clusters <- df %>%
-    vsgseqtools::vsg_distinct_vectorize(df[col2])
+    dplyr::distinct(col2)
 
   expanded <- tidyr::expand_grid(samples, clusters)
 

@@ -13,6 +13,5 @@
 #' vsg_distinct_vectorize(df, col1)
 vsg_distinct_vectorize <- function(df, ...) {
   df %>%
-    dplyr::distinct(...) %>%
-    as.vector()
+    dplyr::distinct(...)
 }
